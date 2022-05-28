@@ -72,20 +72,24 @@ class Loginregisteruser:
         screen2.resizable(0,0)
         #Header pesan tiket
         Label(screen2,text="PESAN TIKET" ,bg='Black',width='300',height='2',font= ('courier new',13, "bold"),fg='white').pack()
+        
+        #Menulis nama pemesan
         Label(screen2,text='').pack()
-        Label(screen2,text= "Nama\t\t:",).place(x=30, y=60)
-        self.entryID = Entry(screen2, font = ("times new roman", 10))
-        self.entryID.place(x=140, y=57)
+        Label(screen2,text="Nama\t\t:",).place(x=30, y=50)
+        self.entry1 = Entry(screen2,font=("times new roman", 10))
+        self.entry1.place(x=140, y=50)
+        
         #button untuk kursi
-        self.radiochr = IntVar()
-        Label(screen2, text = "Seet\t\t:").place(x=30, y=80)
-        self.entrykursi1 = Radiobutton(screen2, text = 'A', variable=self.radiochr,value =1,command=self.seet)
-        self.entrykursi1.place(x = 140, y = 80)
-        self.entrykursi2 = Radiobutton(screen2, text = 'B', variable=self.radiochr,value =2,command=self.seet1)
-        self.entrykursi2.place(x = 140, y = 100)
-        self.entrykursi3 = Radiobutton(screen2, text = 'C', variable=self.radiochr,value =3,command=self.seet2)
-        self.entrykursi3.place(x = 140, y = 120)
+        self.radiochr = StringVar(value="...")
+        Label(screen2, text = "Seet\t\t:").place(x=30, y=75)
+        self.entrykursi1 = Radiobutton(screen2, text = 'A', variable=self.radiochr,value ='A',command=self.seet)
+        self.entrykursi1.place(x = 140, y = 75)
+        self.entrykursi2 = Radiobutton(screen2, text = 'B', variable=self.radiochr,value ='B',command=self.seet1)
+        self.entrykursi2.place(x = 140, y = 95)
+        self.entrykursi3 = Radiobutton(screen2, text = 'C', variable=self.radiochr,value ='C',command=self.seet2)
+        self.entrykursi3.place(x = 140, y = 115)
         Label(screen2, text='Nomor\t\t:').place(x=30, y=140)
+        
         #button untuk memilih film
         self.radio = IntVar()
         Label(screen2, text = "Genre\t\t:").place(x=30, y=165)
@@ -96,19 +100,27 @@ class Loginregisteruser:
         self.entrySrv3 = Radiobutton(screen2, text = 'Horor', variable=self.radio,value =3,command=self.hor_srv)
         self.entrySrv3.place(x = 140, y = 205)
         Label(screen2, text='Film\t\t:').place(x=30, y=230)
+
         #button untuk memilih harga
         Label (screen2, text ="Price List\t\t:").place(x=30, y=260)
         self.radiobtn = IntVar()
         self.radio1 = Radiobutton(screen2, text="Reguler - 30K",variable = self.radiobtn,value=30000).place(x = 140, y = 260)
         self.radio2 = Radiobutton(screen2,text="Sweet Box - 60K",variable = self.radiobtn,value=60000).place(x = 140, y = 280)
+        
+        #button untuk memilih jumlah tiket yang ingin dipesan
+        Label(screen2,text=' ').pack()
+        Label(screen2,text="Jumlah Tiket\t:",).place(x=30, y=315)
+        self.entrysum1 = Entry(screen2,font=("times new roman", 10))
+        self.entrysum1.place(x=140, y=315)
+        
         #button untuk memilih payment
-        Label(screen2,text="Payment Method\t:").place(x=30, y=320)
+        Label(screen2,text="Payment Method\t:").place(x=30, y=345)
         self.strpym = StringVar(value='...') 
         self.combobox1 = ttk.Combobox(screen2,width = 17,font = ("times new roman", 10), textvariable = self.strpym, state ="readonly")
-        self.combobox1.place(x=140, y=320)
+        self.combobox1.place(x=140, y=345)
         self.combobox1['values'] = ('Gopay','Dana','OVO','BCA','BRI','BNI')
         btn = Button(screen2, text="Pay", command=self.payment,bg= 'lightgreen',state=ACTIVE)
-        btn.place(x=270 ,y=317)
+        btn.place(x=270 ,y=343)
         #buat menekan order
         self.btnsub = Button(screen2, text="Order",font=('helvetica',13,'bold'),bg = "green",fg = "white",command = self.btn_sub,state = ACTIVE)
         self.btnsub.place(x = 320, y = 380)
@@ -116,41 +128,36 @@ class Loginregisteruser:
     #Buat menentukan payment, agar sesuai dengan data yang diinginkan
     #Misalnya e-wallet akan menampilkan no hp
     def payment(self):
-        pym = self.strpym.get()
-        if pym == 'Gopay' :
-            Label(screen2, text='No Handphone\t\t:').place(x=30,y=347)
-            self.entrynum = Entry(screen2, font = ("times new roman", 10))
-            self.entrynum.place(x=140, y=347)
-        elif pym == 'Dana':
-            Label(screen2, text='No Handphone\t\t:').place(x=30,y=347)
-            self.entrynum = Entry(screen2, font = ("times new roman", 10))
-            self.entrynum.place(x=140, y= 347)
-        elif pym == 'OVO':
-            Label(screen2, text='No Handphone\t\t:').place(x=30,y=347)
-            self.entrynum = Entry(screen2, font = ("times new roman", 10))
-            self.entrynum.place(x=140, y= 347)
-        elif pym == 'BRI':
-            Label(screen2, text='No Rekening\t\t:').place(x=30,y=347)
-            self.entrynum = Entry(screen2, font = ("times new roman", 10))
-            self.entrynum.place(x=140, y= 347)
-        else:
-            Label(screen2, text ='No Rekening\t\t:').place(x=30, y= 347)
-            self.entryrek = Entry(screen2, font=("times new roman", 10))
-            self.entryrek.place(x=140, y=347)
+        Label(screen2, text ='Nomor\t\t:').place(x=30, y= 375)
+        self.entrynum = Entry(screen2, font=("times new roman", 10))
+        self.entrynum.place(x=140, y=375)
 
     #Mengambil data yang dimasukan, dan menampilkannya
     def btn_sub(self):
-        name = self.entryID.get()
+        name = self.entry1.get()
         kursi = self.radiochr.get()
         gnr = self.radio.get()
+        film = self.region1.get()
         nom = self.radiobtn.get()
+        jml = self.entrysum1.get()
         pym = self.strpym.get()
+        chair = self.chair1.get()
+        pay = self.entrynum.get()
         date = dt.datetime.now()
         if name == "" :
             msg.showwarning("Peringatan","Nama Tidak Boleh Kosong!",parent=self.gui)
             return
+        if kursi == "...":
+            msg.showwarning("Peringatan","Kursi Tidak Boleh Kosong!",parent=self.gui)
+            return
+        if chair == "...":
+            msg.showwarning("Peringatan","Nomor Kursi Tidak Boleh Kosong!",parent=self.gui)
+            return
         if gnr == 0:
             msg.showwarning("Peringatan","Genre Tidak Boleh Kosong!",parent=self.gui)
+            return
+        if film == "...":
+            msg.showwarning("Peringatan","Film Tidak Boleh Kosong!",parent=self.gui)
             return
         if nom == 0:
             msg.showwarning("Peringatan","Harap Pilih Nominal Tiket!",parent=self.gui)
@@ -158,8 +165,11 @@ class Loginregisteruser:
         if pym == "...":
             msg.showwarning("Peringatan","Harap Pilih Metode Pembayaran!",parent=self.gui)
             return
+        if pay == "":
+            msg.showwarning("Peringatan","Nomor HP/Rek Tidak Boleh Kosong!",parent=self.gui)
+            return
         else :
-            msg.showinfo("Info Pesanan",f"Nama\t\t\t: {self.entryID.get()} \nKursi\t\t\t: {self.radiochr.get()} \nTanggal Pemesanan\t: {date:%A, %B %d, %Y} \nMetode Pembayaran\t: {self.strpym.get()} \nTotal Pembayaran\t\t: Rp.{self.radiobtn.get()},- \nStatus Pembayaran\t: Sukses!" )
+            msg.showinfo("Info Pesanan",f"Nama\t\t\t: {self.entry1.get()} \nSeet\t\t\t: {self.radiochr.get()} \nKursi\t\t\t: {self.chair1.get()} \nFilm\t\t\t: {self.region1.get()} \nTanggal Pemesanan\t: {date:%A, %B %d, %Y} \nMetode Pembayaran\t: {self.strpym.get()} \nTotal Pembayaran\t\t: Rp.{self.radiobtn.get() * int(self.entrysum1.get())},- \nStatus Pembayaran\t: Sukses!" )
             self.close_gui()
 
     def roman_srv(self):
@@ -236,3 +246,11 @@ if __name__ == '__main__':
     a_label.place(x=0, y=0, relheight=1, relwidth=1)
     start = Loginregisteruser(app,"CGV CINEMA")
     app.mainloop()
+
+    #Variabel dan Tipe Data
+    #Pengkondisian
+    #Perulangan (for) 
+    #Method and Function
+    #OOP1 (Class and Contructor)
+    #OOP2 (Setter and Getter)
+    #GUI 
